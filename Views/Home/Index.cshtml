@@ -1,0 +1,45 @@
+﻿@{
+    //ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div style="margin:20px;">
+        <label style="float:left;clear:both;">10,- betalen</label>
+
+        <!-- DATA-KEY="" MOET DE WAARDE BEVATTEN VAN EEN PUBLISHABLE API KEY UIT DE DASHBOARD om checkout te kunnen testen-->
+        <form action="handlepayment" method="POST" style="float:left;clear:left;margin-top:20px;">
+            <script src="https://checkout.stripe.com/checkout.js"
+                    class="stripe-button"
+                    data-key=""
+                    data-image="https://www.musjroom.nl/wp-content/uploads/2017/11/MusjrooM-Logo.svg"
+                    data-name="Musjroom"
+                    data-description="Junior Kamer 2personen (€2.00)"
+                    data-panel-label="Betalen met Credit Card"
+                    data-amount="200">
+            </script>
+
+            <input type="hidden" value="200" name="amount" />
+            <input type="hidden" value="AmsterdamTestHotel" name="location" />
+        </form>
+
+        <button class="btn btn-primary" style="height:auto;width:auto;margin:20px;float:left;" onclick="document.getElementById('idealview').style.display = ''">Betalen met ideal</button>
+
+        @*VOOR HET TESTEN MET IDEAL EN WERKELIJK DE IDEAL PAGINA TE KUNNEN ZIEN, ZET DE SETAPIKEY WAARDE IN STRIPECONFIG MET DE SECREDT LIVE API KEY UIT DE DASHBOARD. *@
+        <div id="idealview" style="display:none;margin-top:30px;float:left;clear:both;">
+            <form action="SourcePayment" method="post" id="formideal">
+                <label>
+                    Uw naam:
+                </label>
+                <input type="text" value="" name="owner" />
+                <input type="hidden" value="1" name="amount" />
+                <button type="submit" form="formideal">Betalen</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <label>
+        @Html.Raw(ViewBag.PaymentProces)
+    </label>
+</div>
